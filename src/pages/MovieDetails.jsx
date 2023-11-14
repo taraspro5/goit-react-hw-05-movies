@@ -22,8 +22,7 @@ export default function MovieDetails() {
   const defaultImg =
     'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
-  const { release_date, overview, vote_average, genres, title, poster_path } =
-    movie;
+  const { release_date, overview, vote_average, genres, title } = movie;
   const voteAverage = Math.round(vote_average * 10) + '%';
   const releaseYear = new Date(release_date).getFullYear();
 
