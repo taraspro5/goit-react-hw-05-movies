@@ -1,4 +1,5 @@
 import { fetchAllMovies } from 'api/api';
+import { Loader } from 'components/Loader/Loader';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { useEffect, useState } from 'react';
 
@@ -28,7 +29,7 @@ export default function HomePage() {
     <>
       <h1>Trending today</h1>
       {error && <p>Something went wrong, try again.</p>}
-      {loading && <p>Loading...</p>}
+      {loading && <Loader />}
       {movies.length > 0 && <MoviesList movies={movies} />}
     </>
   );
