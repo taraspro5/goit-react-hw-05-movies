@@ -2,6 +2,7 @@ import { fetchMovieReviews } from 'api/api';
 import { Loader } from 'components/Loader/Loader';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Comment, CommentsWrapper, NoComment } from './Reviews.styled';
 
 export const Reviews = () => {
   const [review, setReview] = useState([]);
@@ -29,19 +30,25 @@ export const Reviews = () => {
 
   return (
     <>
-      {error && <p>Something went wrong, try again.</p>}
-      {loading && <Loader />}
-      {review.length > 0 ? (
-        <ul>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <p>Something went wrong, try again.</p>
+      ) : review.length > 0 ? (
+        <CommentsWrapper>
           {review.map(({ id, author, content }) => (
-            <li key={id}>
-              {author && <p>Author: {author}</p>}
+            <Comment key={id}>
+              {author && (
+                <p>
+                  <b>Author: {author}</b>
+                </p>
+              )}
               {content && <p>{content}</p>}
-            </li>
+            </Comment>
           ))}
-        </ul>
+        </CommentsWrapper>
       ) : (
-        <p>We don`t have reviews for this movie</p>
+        <NoComment>We don`t have reviews for this movie</NoComment>
       )}
     </>
   );

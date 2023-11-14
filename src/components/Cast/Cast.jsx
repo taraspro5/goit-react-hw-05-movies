@@ -2,6 +2,7 @@ import { fetchMovieCredits } from 'api/api';
 import { Loader } from 'components/Loader/Loader';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { CastNothing, CastWrapper } from './Cast.styled';
 
 export const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -35,10 +36,12 @@ export const Cast = () => {
 
   return (
     <>
-      {error && <p>Something went wrong, try again.</p>}
-      {loading && <Loader />}
-      {cast.length > 0 ? (
-        <ul>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <p>Something went wrong, try again.</p>
+      ) : cast.length > 0 ? (
+        <CastWrapper>
           {cast.map(({ cast_id, profile_path, name, character }) => {
             return (
               <li key={cast_id}>
@@ -56,9 +59,9 @@ export const Cast = () => {
               </li>
             );
           })}
-        </ul>
+        </CastWrapper>
       ) : (
-        <div>Nothing</div>
+        <CastNothing>Nothing</CastNothing>
       )}
     </>
   );

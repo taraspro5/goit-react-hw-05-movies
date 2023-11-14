@@ -27,10 +27,16 @@ export default function HomePage() {
 
   return (
     <>
-      <h1>Trending today</h1>
-      {error && <p>Something went wrong, try again.</p>}
-      {loading && <Loader />}
-      {movies.length > 0 && <MoviesList movies={movies} />}
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <p>Something went wrong, try again.</p>
+      ) : (
+        <>
+          <h1>Trending today</h1>
+          {movies.length > 0 && <MoviesList movies={movies} />}
+        </>
+      )}
     </>
   );
 }
